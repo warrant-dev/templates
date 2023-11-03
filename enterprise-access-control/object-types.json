@@ -1,0 +1,47 @@
+[
+    {
+        "type": "organization",
+        "relations": {
+            "admin": {},
+            "member": {
+                "inheritIf": "admin"
+            }
+        }
+    },
+    {
+        "type": "team",
+        "relations": {
+            "org": {},
+            "manager": {
+                "inheritIf": "admin",
+                "ofType": "organization",
+                "withRelation": "parent"
+            },
+            "member": {
+                "inheritIf": "manager"
+            }
+        }
+    },
+    {
+        "type": "employee",
+        "relations": {
+            "parent": {}
+        }
+    },
+    {
+        "type": "application",
+        "relations": {
+            "owner": {},
+            "admin": {
+                "inheritIf": "manager",
+                "ofType": "team",
+                "withRelation": "owner"
+            },
+            "viewer": {
+                "inheritIf": "member",
+                "ofType": "team",
+                "withRelation": "owner"
+            }
+        }
+    }
+]

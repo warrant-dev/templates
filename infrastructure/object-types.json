@@ -1,0 +1,33 @@
+[
+    {
+        "type": "team",
+        "relations": {
+            "manager": {},
+            "member": {
+                "inheritIf": "manager"
+            }
+        }
+    },
+    {
+        "type": "developer",
+        "relations": {
+            "parent": {}
+        }
+    },
+    {
+        "type": "service",
+        "relations": {
+            "owner": {},
+            "admin": {
+                "inheritIf": "manager",
+                "ofType": "team",
+                "withRelation": "owner"
+            },
+            "can-access": {
+                "inheritIf": "member",
+                "ofType": "team",
+                "withRelation": "owner"
+            }
+        }
+    }
+]
