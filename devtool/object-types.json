@@ -1,0 +1,50 @@
+[
+    {
+        "type": "tenant",
+        "relations": {
+            "owner": {},
+            "admin": {
+                "inheritIf": "owner"
+            },
+            "member": {
+                "inheritIf": "admin"
+            }
+        }
+    },
+    {
+        "type": "team",
+        "relations": {
+            "parent": {},
+            "admin": {
+                "inheritIf": "admin",
+                "ofType": "tenant",
+                "withRelation": "parent"
+            },
+            "member": {
+                "inheritIf": "admin"
+            }
+        }
+    },
+    {
+        "type": "user",
+        "relations": {
+            "parent": {}
+        }
+    },
+    {
+        "type": "application",
+        "relations": {
+            "owner": {},
+            "editor": {
+                "inheritIf": "admin",
+                "ofType": "team",
+                "withRelation": "owner"
+            },
+            "viewer": {
+                "inheritIf": "member",
+                "ofType": "team",
+                "withRelation": "owner"
+            }
+        }
+    }
+]
